@@ -19,8 +19,8 @@ class powerdns::install (
     ensure => $package_ensure,
   } ~>
   exec { 'Remove default Ubuntu conf files':
-    command => '/bin/rm -rf /etc/powerdns/pdns.d/pdns.*;',
-    onlyif  => "/usr/bin/test -f /etc/powerdns/pdns.d/pdns.local.conf"
+    command => '/bin/rm /etc/powerdns/pdns.d/pdns.*;',
+    onlyif  => "/usr/bin/test -f /etc/powerdns/pdns.d/pdns.local.conf",
   }
 
 }
