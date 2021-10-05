@@ -1,17 +1,17 @@
 {
-  "name": "mcjones-powerdns",
-  "version": "1.0.1",
-  "author": "Micheal jones",
+  "name": "chealion-powerdns",
+  "version": "2.0.0a",
+  "author": "Micheal Jones",
   "license": "Apache-2.0",
   "summary": "Module to install powerdns",
-  "source": "https://github.com/mcjones/puppet-powerdns",
-  "project_page": "https://github.com/mcjones/puppet-powerdns",
-  "issues_url": "https://github.com/mcjones/puppet-powerdns/issues",
+  "source": "https://github.com/chealion/puppet-powerdns",
+  "project_page": "https://github.com/chealion/puppet-powerdns",
+  "issues_url": "https://github.com/chealion/puppet-powerdns/issues",
   "tags": ["powerdns"],
   "operatingsystem_support": [
     {
     "operatingsystem": "Ubuntu",
-    "operatingsystemrelease": [ "14.04" ]
+    "operatingsystemrelease": [ "16.04" ]
     }
    ],
   "dependencies": [
