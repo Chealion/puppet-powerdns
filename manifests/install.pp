@@ -9,18 +9,21 @@ class powerdns::install (
   $package_ensure = latest,
 ) {
 
+  package { 'gnupg-curl':
+    ensure =>  latest,
+  } ->
   apt::key { 'powerdns':
-    ensure => present,
-    id     => '9FAAA5577E8FCF62093D036C1B0C6205FD380FBB',
-    source => 'https://repo.powerdns.com/FD380FBB-pub.asc',
+    # Note change to id and server when upgrading to Puppet 7 and newer apt
+    key       => '9FAAA5577E8FCF62093D036C1B0C6205FD380FBB',
+    key_server => 'https://repo.powerdns.com/FD380FBB-pub.asc',
   }
 
   apt::source { 'repo.powerdns.com':
-    ensure => present,
-    location => 'http://repo.powerdns.com/ubuntu',
-    repos => 'main',
-    release => 'xenial-auth-44',
-    architecture => 'amd64',
+    location     => 'http://repo.powerdns.com/ubuntu',
+    repos        => 'main',
+    release      => 'xenial-auth-44',
+    #architecture => 'amd64',
+    include_src  => false,
     require      => Apt::Key['powerdns'],
   }
 
@@ -28,7 +31,7 @@ class powerdns::install (
     priority => 600,
     packages => 'pdns-*',
     origin   => 'repo.powerdns.com',
-    require  => Apt::Source['powerdns'],
+    require  => Apt::Source['repo.powerdns.com'],
   }
 
   $default_package_name = $::osfamily ? {

@@ -19,8 +19,8 @@ class powerdns::backend::gmysql (
 
   file { $config_file:
     ensure => present,
-    owner  => 'root',
-    group  => 'root',
+    owner  => 'pdns',
+    group  => 'pdns',
     mode   => '0640',
     notify => Service['powerdns'],
   }

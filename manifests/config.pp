@@ -11,21 +11,21 @@ class powerdns::config (
 
   file { $config_path:
     ensure => directory,
-    owner  => 'root',
-    group  => 'root',
+    owner  => 'pdns',
+    group  => 'pdns',
     mode   => '0755',
   }
 
   file { "${config_path}/pdns.d":
     ensure => directory,
-    owner  => 'root',
-    group  => 'root',
+    owner  => 'pdns',
+    group  => 'pdns',
     mode   => '0755',
   } ->
   file { $config_file:
     ensure => present,
-    owner  => 'root',
-    group  => 'root',
+    owner  => 'pdns',
+    group  => 'pdns',
     mode   => '0640',
     notify => Service['powerdns'],
   }
