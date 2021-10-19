@@ -9,11 +9,16 @@ class powerdns::config (
   $config_file = '/etc/powerdns/pdns.conf',
 ) {
 
+  $tags = ['pdns']
+  # Use tags to make sure pdns restarts when the config changes
+  Powerdns_config<| tag == 'pdns' |> ~> Service<| tag == 'pdns' |>
+
   file { $config_path:
     ensure => directory,
     owner  => 'pdns',
     group  => 'pdns',
     mode   => '0755',
+    tag    => $tags,
   }
 
   file { "${config_path}/pdns.d":
@@ -27,12 +32,14 @@ class powerdns::config (
     owner  => 'pdns',
     group  => 'pdns',
     mode   => '0640',
+    tag    => $tags,
     notify => Service['powerdns'],
   }
 
   $settings.each |$setting, $value| {
     powerdns_config { "${config_file}: ${setting}":
       value => $value,
+      tag   => $tags,
     }
   }
 
